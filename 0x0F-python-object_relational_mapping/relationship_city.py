@@ -1,13 +1,15 @@
 #!/usr/bin/python3
-"""file that contains the class definition of a City"""
-from model_state import Base
-from sqlalchemy import Column, Integer, String, create_engine, ForeignKey
+"""Lists states"""
+
+from sqlalchemy import Column, Integer, String, ForeignKey
+from relationship_state import Base
 
 
 class City(Base):
-    """class City"""
-    __tablename__ = "cities"
-    id = (Column(Integer, autoincrement=True,
-                 unique=True, nullable=False, primary_key=True))
+    """Class representing the states table"""
+    __tablename__ = 'cities'
+
+    id = Column(Integer, nullable=False, primary_key=True,
+                autoincrement=True, unique=True)
     name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey("states.id"), nullable=False)

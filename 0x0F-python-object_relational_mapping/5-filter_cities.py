@@ -1,21 +1,19 @@
 #!/usr/bin/python3
-"""script that takes in the name of a state as an
-argument and lists all cities of that state,"""
+"""
+A Scrript that takes in the name of a state as an argument and lists all
+cities of that state,
+"""
+
+import MySQLdb
+from sys import argv
 
 if __name__ == "__main__":
-    import sys
-    import MySQLdb
-
-    dbUser = sys.argv[1]
-    pswd = sys.argv[2]
-    dbName = sys.argv[3]
-    stateName = sys.argv[4]
-
-    """make a connection w our db"""
-    db = MySQLdb.connect(host='localhost', user=dbUser, passwd=pswd, db=dbName)
-
+    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                         passwd=argv[2], db=argv[3])
     cur = db.cursor()
-    cur.execute("SELECT id FROM states WHERE name=%s", stateName)
-
-    res = cur.fetchonce()
-    cur.execute("SELECT name FROM cities WHERE id=%s", )
+    cur.execute("SELECT cities.id, cities.name FROM cities "
+                "JOIN states ON cities.state_id = states.id "
+                "WHERE states.name = '{}'".format(argv[4]))
+    print(", ".join([row[1] for row in cur.fetchall()]))
+    cur.close()
+    db.close()

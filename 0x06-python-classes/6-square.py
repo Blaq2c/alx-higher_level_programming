@@ -1,22 +1,28 @@
 #!/usr/bin/python3
-"""Square class defination"""
+"""Define a class Square."""
 
 
 class Square:
-    """Square class body"""
+    """Represent a square."""
 
     def __init__(self, size=0, position=(0, 0)):
-        """Square constructor .
+        """Initialize a new Square.
         Args:
-            size (int): The size of the new square.
-            square position (int, int): of Tupple.
+            size (int): size of a side of the Square
+            position (int, int): The position of the new square.
+        Return: None
         """
-        self.size = size
+
+        if not isinstance(size, int):
+            raise TypeError("size must be an integer")
+        elif size < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = size
         self.position = position
 
     @property
     def size(self):
-        """Setter and getter of a  square."""
+        """Get/set the current size of the Square."""
         return (self.__size)
 
     @size.setter
@@ -29,7 +35,7 @@ class Square:
 
     @property
     def position(self):
-        """Getter and Setter for position of the square."""
+        """Get/set the current position of the Square."""
         return (self.__position)
 
     @position.setter
@@ -42,14 +48,16 @@ class Square:
         self.__position = value
 
     def area(self):
-        """Return new area of the square."""
+        """Return the current area of the Square."""
+
         return (self.__size * self.__size)
 
     def my_print(self):
-        """Print the stdout the square with the character."""
+        """Print the Square with the # character."""
+
         if self.__size == 0:
             print("")
-            return
+
 
         [print("") for i in range(0, self.__position[1])]
         for i in range(0, self.__size):

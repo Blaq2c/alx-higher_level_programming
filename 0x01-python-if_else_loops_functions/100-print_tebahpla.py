@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-for i in range(122, 96, -1):
-    if i % 2:
-        i = i - 32
-    print("{:c}".format(i), end="")
+for j in range(26):
+    if j % 2 == 0:
+        print("{:c}".format(122 - j), end='')
+    else:
+        print("{:c}".format(90 - j), end='')

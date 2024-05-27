@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-import my_easy_print
+[os.write(1, b"#pythoniscool\n") for os in [__import__('os')]]

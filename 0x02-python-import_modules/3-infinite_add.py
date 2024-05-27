@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-if __name__ == "__main__":
-    import sys
-    result = 0
+import sys
 
-    for i, args in enumerate(sys.argv):
-        if i == 0:
-            continue
-        result += int(args)
-    print(f"{result:d}")
+if __name__ == "__main__":
+    infinite = sys.argv[1:]
+    sum = 0
+    for i in infinite:
+        sum += int(i)
+    print(sum)

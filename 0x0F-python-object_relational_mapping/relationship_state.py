@@ -1,24 +1,23 @@
 #!/usr/bin/python3
-"""file that contains the class definition of a
-State and an instance Base = declarative_base()"""
-import sqlalchemy
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import relationship
+"""Lists states"""
 
-Base = sqlalchemy.orm.declarative_base()
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, backref
 
-"""class State that inherits from Base"""
+Base = declarative_base()
 
 
 class State(Base):
-    """Represents a state for a MySQL database.
+    """Class representing the states table"""
+    __tablename__ = 'states'
 
-    __tablename__ :name of the MySQL table to store States.
-    id: state's id.
-    name: state's name.
-    """
-    __tablename__ = "states"
-    id = Column(Integer, autoincrement=True,
-                primary_key=True, unique=True, nullable=False)
+    id = Column(Integer, nullable=False, primary_key=True,
+                autoincrement=True, unique=True)
     name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade="all, delete", backref="state")
+
+    cities = relationship(
+        "City",
+        cascade="all, delete-orphan",
+        backref=backref("state", cascade="all"),
+        single_parent=True)

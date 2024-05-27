@@ -1,73 +1,76 @@
-``0-add_integer`` code testing
+The ``0-add_integer`` module
+======================
 
-Using ``add_integer`` function
+Using ``add_integer``
+-------------------
 
-test cases for the function ``add_integer``.
-import function:
-    
-    >>> add_integer = __import__('0-add_integer').add_integer
+Importing the function from the module:
+	>>> add_integer = __import__("0-add_integer").add_integer
 
-How to use it:
+Checking for module docstring:
+	>>> k = __import__("0-add_integer").__doc__
+	>>> len(k) > 1
+	True
 
-Test_1 adding two integers
+Checking for function docstring:
+	>>> k = __import__("0-add_integer").add_integer.__doc__
+	>>> len(k) > 1
+	True
 
-    >>> add_integer(2, 1)
-    3
+Checking normal addition:
+	>>> add_integer(1, 2)
+	3
 
-Test_2 adding float with integer cast to the small int value
+Checking addition with negative and positive numbers:
+	>>> add_integer(-1, 2)
+	1
 
-    >>> add_integer(3.2, 2)
-    5
+Checking addition with negative and negative numbers:
+	>>> add_integer(-1, -2)
+	-3
 
-Test_3 adding int with str
+Checking additon with multiple values:
+	>>> [add_integer(i, i*2) for i in range(10)]
+	[0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
 
-    >>> add_integer("3", 4)
-    Traceback (most recent call last):
-    TypeError: a must be an integer
+Checking addition with floats:
+	>>> add_integer(1.1, 2.2)
+	3
 
-Test_4 adding str with int
+Checking addition with int and float:
+	>>> add_integer(1, 2.2)
+	3
 
-    >>> add_integer(3, "4")
-    Traceback (most recent call last):
-    TypeError: b must be an integer
+Checking addition with float and int:
+	>>> add_integer(5.1, 2)
+	7
 
-Test_5 adding None with int
+Checking addition with number and non-number:
+	>>> add_integer(1, "2")
+	Traceback (most recent call last):
+	...
+	TypeError: b must be an integer
 
-    >>> add_integer(None, 4)
-    Traceback (most recent call last):
-    TypeError: a must be an integer
+Checking addition with non-number and number:
+	>>> add_integer("1", 2)
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
 
-Test_6 adding just first parameter as None
+Checking addition with non-number and non-number:
+	>>> add_integer("1", "2")
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
 
-    >>> add_integer(None)
-    Traceback (most recent call last):
-    TypeError: a must be an integer
+Checking addition with boolean and number:
+	>>> add_integer(True, 2)
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
 
-Test_7 adding negative numbers
-
-    >>> add_integer(-3, -4)
-    -7
-
-Test_8 adding negative float numbers
-
-    >>> add_integer(-3.4, -4.6)
-    -7
-
-Test_9 second argument as None
-
-    >>> add_integer(-3.4, None)
-    Traceback (most recent call last):
-    TypeError: b must be an integer
-
-Test_10 both arguments as strings
-
-    >>> add_integer("-3.4", "3")
-    Traceback (most recent call last):
-    TypeError: a must be an integer
-
-Test_11 No arguments
-
-    >>> add_integer()
-    Traceback (most recent call last):
-    TypeError: add_integer() missing 1 required positional argument: 'a'
-
+Checking addition with number and boolean:
+	>>> add_integer(1, True)
+	Traceback (most recent call last):
+	...
+	TypeError: b must be an integer

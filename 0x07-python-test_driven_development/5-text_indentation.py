@@ -1,23 +1,11 @@
 #!/usr/bin/python3
-"""My string module performs operations on strings
-"""
+"""Text indentation module."""
 
 
 def text_indentation(text):
-    """Prints 2 new lines after each . ? or : character in a string
-
-    Args:
-        text (str): The text to perform operation on
-    """
+    """Print text with 2 new lines after each of these characters: ., ? and :."""
     if not isinstance(text, str):
         raise TypeError("text must be a string")
-    operators = ['.', '?', ':']
-    new_str = ""
-    for letter in text:
-        new_str += letter
-        if letter in operators:
-            new_str += "\n"
-            print(new_str.strip(" "))
-            new_str = ""
-    if letter not in operators:
-        print(new_str.strip(" "), end="")
+    for char in ".?:":
+        text = text.replace(char, char + "\n\n")
+    print(text)

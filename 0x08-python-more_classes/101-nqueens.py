@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-nqueens backtracking program to print the coordinates of n queens
-on an nxn grid such that they are all in non-attacking positions
+nqueens backtracking program to print the cordinates of n queens
+on an n x n chessboard
 """
 
 
@@ -12,20 +12,21 @@ if __name__ == "__main__":
     if len(argv) != 2:
         print("Usage: nqueens N")
         exit(1)
-    if argv[1].isdigit() is False:
+
+    if not argv[1].isdigit():
         print("N must be a number")
         exit(1)
+
     n = int(argv[1])
     if n < 4:
         print("N must be at least 4")
         exit(1)
 
-    # initialize the answer list
     for i in range(n):
         a.append([i, None])
 
     def already_exists(y):
-        """check that a queen does not already exist in that y value"""
+        """Check that a queen does not already exist in that y value"""
         for x in range(n):
             if y == a[x][1]:
                 return True
@@ -48,15 +49,14 @@ if __name__ == "__main__":
             a[i][1] = None
 
     def nqueens(x):
-        """recursive backtracking function to find the solution"""
-        for y in range(n):
-            clear_a(x)
-            if reject(x, y):
-                a[x][1] = y
-                if (x == n - 1):  # accepts the solution
-                    print(a)
-                else:
-                    nqueens(x + 1)  # moves on to next x value to continue
+        """backtracking function"""
+        if x == n:
+            print(a)
+        else:
+            for y in range(n):
+                if reject(x, y):
+                    a[x][1] = y
+                    nqueens(x + 1)
+                    clear_a(x)
 
-    # start the recursive process at x = 0
     nqueens(0)
